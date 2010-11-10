@@ -32,7 +32,6 @@ public class ChineseWhispers {
 		// new ChineseWhispers();
 		Translate.setHttpReferrer("http://www.google.co.uk/");
 
-		int n = 2;
 		String text = "Does the associative law apply to multiplicative equations in a Bernoulli system in a harmonised spatial plane?";
 		out("Original:\n\t" + text);
 
@@ -41,7 +40,20 @@ public class ChineseWhispers {
 		System.out.println("Result:\n\t" + bounceN(text, chain, 1));
 	}
 
-	private static String bounceN(String text, Language[] lang, int iterations)
+	/**
+	 * "Bounces" a string between various languages.
+	 * 
+	 * @param text
+	 *            The text to translate.
+	 * @param lang
+	 *            An array of languages, in order of use.
+	 * @param iterations
+	 *            The number of iterations to perform.
+	 * @return The resulting text.
+	 * @throws Exception
+	 *             If Google Translate throws an error.
+	 */
+	public static String bounceN(String text, Language[] lang, int iterations)
 			throws Exception {
 		int i, j;
 		Language from, to;

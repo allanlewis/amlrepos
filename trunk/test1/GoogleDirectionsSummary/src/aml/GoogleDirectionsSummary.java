@@ -11,20 +11,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GoogleDirectionsSummary {
-	final String urlBase = "http://maps.googleapis.com/maps/api/directions/json?";
+
+	enum eUnits {
+		imperial, metric
+	};
 
 	public GoogleDirectionsSummary() {
-		String params = "origin=NW42AR&destination=L186HP"
-				+ "&alternatives=true&units=imperial&region=uk"
-				+ "&language=en-GB&sensor=false";
-		URL url = null;
-		try {
-			url = new URL(urlBase + params);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		JSONObject j = getJSON(url);
+		URL url = getGoogleMapsURL("NW4 2AR", "AL10 9BD", true, eUnits.imperial);
+		final JSONObject j = getJSON(url);
 		/*
 		 * try { System.out.println(j.toString(4)); } catch (JSONException e) {
 		 * e.printStackTrace(); System.exit(-1); }
@@ -34,8 +28,8 @@ public class GoogleDirectionsSummary {
 		while (i.hasNext()) {
 			s = i.next();
 			System.out.println(s);
-			System.
 		}
+
 	}
 
 	public static void main(String[] args) {
@@ -58,5 +52,24 @@ public class GoogleDirectionsSummary {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	private URL getGoogleMapsURL(String origin, String dest, boolean alt,
+			eUnits units) {
+		final String urlBase = "http://maps.googleapis.com/maps/api/directions/json?";
+		origin = origin.replaceAll(" ", "+");
+		dest = dest.replaceAll(" ", "+");
+		final String params = "origin=" + origin + "&destination=" + dest
+				+ "&alternatives=" + Boolean.toString(alt) + "&units="
+				+ units.toString() + "&region=uk"
+				+ "&language=en-GB&sensor=false";
+		URL url = null;
+		try {
+			url = new URL(urlBase + params);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		return url;
 	}
 }

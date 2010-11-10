@@ -14,13 +14,6 @@ import com.google.api.translate.Translate;
 public class ChineseWhispers {
 
 	/**
-	 * Default constructor.
-	 */
-	public ChineseWhispers() {
-
-	}
-
-	/**
 	 * Main function.
 	 * 
 	 * @param args
@@ -37,7 +30,7 @@ public class ChineseWhispers {
 
 		Language[] chain = { Language.ENGLISH, Language.CZECH, Language.DUTCH,
 				Language.GERMAN };
-		System.out.println("Result:\n\t" + bounceN(text, chain, 1));
+		System.out.println("Result:\n\t" + bounce(text, chain, 1));
 	}
 
 	/**
@@ -53,7 +46,7 @@ public class ChineseWhispers {
 	 * @throws Exception
 	 *             If Google Translate throws an error.
 	 */
-	public static String bounceN(String text, Language[] lang, int iterations)
+	public static String bounce(String text, Language[] lang, int iterations)
 			throws Exception {
 		int i, j;
 		Language from, to;

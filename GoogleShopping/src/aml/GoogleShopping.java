@@ -56,7 +56,9 @@ public class GoogleShopping {
 			products.add(new GoogleProduct(product));
 		}
 		CompPriceAscending asc = new CompPriceAscending();
+		@SuppressWarnings("unused")
 		CompPriceDescending desc = new CompPriceDescending();
+		@SuppressWarnings("unused")
 		CompBrand cBrand = new CompBrand();
 		
 		Collections.sort(products, asc);

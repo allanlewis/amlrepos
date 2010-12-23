@@ -55,21 +55,10 @@ public class GoogleShopping {
 			printProduct(product);
 			products.add(new GoogleProduct(product));
 		}
-		CompPriceAscending asc = new CompPriceAscending();
-		@SuppressWarnings("unused")
-		CompPriceDescending desc = new CompPriceDescending();
-		@SuppressWarnings("unused")
-		CompBrand cBrand = new CompBrand();
 		
-		Collections.sort(products, asc);
+		Collections.sort(products, new CompPriceAscending());
 		print(products.get(0).getPriceString());	
 
-		// Collections.sort(products, desc);
-		// print(products.get(0).getPriceString());
-		//
-		// Collections.sort(products, cBrand);
-		// print(products.get(0).getBrand());
-		
 		print("");
 		for (int i = 0; i < products.size(); i++) {
 			print(products.get(i).toString());

@@ -48,13 +48,6 @@ public class GoogleShopping {
 
 		JSONObject j = new JSONObject(content);
 		JSONArray items = j.getJSONArray("items");
-		// System.out.println(items.toString(2));
-		// JSONObject first = items.getJSONObject(0);
-		// System.out.println(first.toString(2));
-		// JSONObject firstProduct = first.getJSONObject("product");
-		// printJSON(firstProduct);
-		// print("\n\n");
-		// printProduct(firstProduct);
 		JSONObject product = new JSONObject();
 		ArrayList<GoogleProduct> products = new ArrayList<GoogleProduct>();
 		for (int i = 0; i < items.length(); i++) {
@@ -62,7 +55,23 @@ public class GoogleShopping {
 			printProduct(product);
 			products.add(new GoogleProduct(product));
 		}
-		Collections.sort(products);
+		CompPriceAscending asc = new CompPriceAscending();
+		CompPriceDescending desc = new CompPriceDescending();
+		CompBrand cBrand = new CompBrand();
+		
+		Collections.sort(products, asc);
+		print(products.get(0).getPriceString());	
+
+		// Collections.sort(products, desc);
+		// print(products.get(0).getPriceString());
+		//
+		// Collections.sort(products, cBrand);
+		// print(products.get(0).getBrand());
+		
+		print("");
+		for (int i = 0; i < products.size(); i++) {
+			print(products.get(i).toString());
+		}
 	}
 
 	/**

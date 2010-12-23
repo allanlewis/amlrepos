@@ -35,8 +35,14 @@ public class GoogleProduct implements Comparable<GoogleProduct> {
 		title = product.has("title") ? product.getString("title") : "";
 		description = product.has("description") ? product
 				.getString("description") : "";
-		retailer = product.has("retailer") ? product.getString("retailer") : "";
 		link = product.has("link") ? product.getString("link") : "";
+
+		// Retailer is within the "author" object
+		JSONObject author = new JSONObject();
+		if (product.has("author")) {
+			author = product.getJSONObject("author");
+		}
+		retailer = author.has("name") ? author.getString("name") : "";
 
 		// Price is within the "inventories" array
 		JSONArray inv = new JSONArray();
@@ -69,7 +75,13 @@ public class GoogleProduct implements Comparable<GoogleProduct> {
 		else if (price > o.price)
 			return 1;
 		else
-			return 0;		
+			return 0;
+	}
+
+	@Override
+	public String toString() {
+		return brand + ": " + title + "\n" + retailer + ": " + priceString
+				+ "\n";
 	}
 
 	/**

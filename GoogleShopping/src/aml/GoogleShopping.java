@@ -3,17 +3,14 @@
  */
 package aml;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.Iterator;
-
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,10 +56,13 @@ public class GoogleShopping {
 		// print("\n\n");
 		// printProduct(firstProduct);
 		JSONObject product = new JSONObject();
+		ArrayList<GoogleProduct> products = new ArrayList<GoogleProduct>();
 		for (int i = 0; i < items.length(); i++) {
 			product = items.getJSONObject(i).getJSONObject("product");
 			printProduct(product);
+			products.add(new GoogleProduct(product));
 		}
+		Collections.sort(products);
 	}
 
 	/**
@@ -84,6 +84,7 @@ public class GoogleShopping {
 		return;
 	}
 
+	@SuppressWarnings("unused")
 	private void printJSON(JSONObject j) throws JSONException {
 		print(j.toString(2));
 		return;

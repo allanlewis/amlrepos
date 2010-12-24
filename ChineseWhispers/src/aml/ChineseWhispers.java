@@ -3,6 +3,12 @@
  */
 package aml;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+
 import com.google.api.translate.Language;
 import com.google.api.translate.Translate;
 
@@ -22,10 +28,28 @@ public class ChineseWhispers {
 	 *             If translation fails.
 	 */
 	public static void main(String[] args) throws Exception {
-		// new ChineseWhispers();
 		Translate.setHttpReferrer("http://www.google.co.uk/");
 
-		String text = "Does the associative law apply to multiplicative equations in a Bernoulli system in a harmonised spatial plane?";
+		File f = new File("text.txt");
+		BufferedReader in;
+		String text = "", temp = "";
+		try {
+			in = new BufferedReader(new InputStreamReader(
+					new FileInputStream(f)));
+			while (true) {
+				temp = in.readLine();
+				if (temp != null) {
+					text = text + temp + " ";
+				} else {
+					text = text.trim();
+					break;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+			System.exit(-1);
+		}
+
 		out("Original:\n\t" + text);
 
 		Language[] chain = { Language.ENGLISH, Language.CZECH, Language.DUTCH,
